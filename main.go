@@ -5,6 +5,8 @@ import (
 	"time"
 	"os"
 	"errors"
+	endPoint "go_chat/src"
+	"flag"
 )
 
 func getGreeting(hour int) (string, error)  {
@@ -37,4 +39,20 @@ func main() {
 		fmt.Println("Hello, I am Gopher")
 	}
 	fmt.Println(greeting)
+
+	var isHost bool
+
+	flag.BoolVar(&isHost, "listen", false, "Listen on the given ip address")
+	flag.Parse()
+
+	if isHost {
+		ip := os.Args[2]
+		host := endPoint.Host{Ip: ip}
+		host.Run()
+	} else {
+		ip := os.Args[1]
+		guest := endPoint.Guest{Ip: ip}
+		guest.Run()
+	}
+
 }
