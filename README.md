@@ -3,7 +3,7 @@ Go chat is a command line chatting app, where two people can share a local netwo
 
 ### Motivation:
 This is the final course project for a GOlang course I took online with CodeSchool. I did not purchase the course however I did the final project. 
-The code satisfies the same requirements as the course project, however I implemented it using: **structs** and an **object oriented approach**.
+The code satisfies the same requirements as the course project, however I implemented it with an **object oriented approach**. This version also support **simultaneous** messaging where host and guest can send messages at the same time, which is done using the Golang's **multi-threaded** capablities.
 
 ### Build and Run
 To run as host:
