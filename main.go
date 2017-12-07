@@ -5,7 +5,7 @@ import (
 	"time"
 	"os"
 	"errors"
-	endPoint "go_chat/src"
+	endPoint "go_chat/src/core"
 	"flag"
 )
 
@@ -40,12 +40,10 @@ func main() {
 	}
 	fmt.Println(greeting)
 
-	var isHost bool
-
-	flag.BoolVar(&isHost, "listen", false, "Listen on the given ip address")
+	isHost := flag.Bool("listen", false, "Listen on the given ip address")
 	flag.Parse()
 
-	if isHost {
+	if *isHost {
 		ip := os.Args[2]
 		host := endPoint.Host{Ip: ip}
 		host.Run()
@@ -54,5 +52,4 @@ func main() {
 		guest := endPoint.Guest{Ip: ip}
 		guest.Run()
 	}
-
 }

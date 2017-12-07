@@ -1,4 +1,4 @@
-package src
+package core
 
 import (
 	"net"
@@ -14,16 +14,7 @@ type Host struct {
 	Ip   string
 }
 
-func (Host Host) Listen(conn net.Conn)  {
-	connReader := bufio.NewReader(conn)
-
-	message, connErr := connReader.ReadString('\n')
-	if connErr != nil {
-		log.Fatal("Error: ", connErr)
-	}
-	fmt.Println("New message: ", message)
-
-	fmt.Print("Reply: ")
+func (Host Host) send(conn net.Conn) {
 	stdReader := bufio.NewReader(os.Stdin)
 
 	reply, sysErr := stdReader.ReadString('\n')
@@ -32,6 +23,22 @@ func (Host Host) Listen(conn net.Conn)  {
 	}
 
 	fmt.Fprint(conn, reply)
+}
+
+func (Host Host) receive(conn net.Conn) {
+	connReader := bufio.NewReader(conn)
+	message, connErr := connReader.ReadString('\n')
+	if connErr != nil {
+		log.Fatal("Error: ", connErr)
+	}
+	fmt.Print("Guest: " + message)
+}
+
+func (Host Host) Listen(conn net.Conn)  {
+	for {
+		go Host.send(conn)
+		Host.receive(conn)
+	}
 }
 
 func (Host Host) Run() {
@@ -49,7 +56,5 @@ func (Host Host) Run() {
 	}
 	fmt.Println("New connection accepted")
 
-	for {
-		Host.Listen(conn)
-	}
+	Host.Listen(conn)
 }
