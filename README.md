@@ -1,7 +1,7 @@
 # go_chat
 Go chat is a command line chatting app, where two people can share a local network to chat with each other. One of them is a host and the other being the guest.
 
-# Many-To-Many (Under developement, branch many-to-many)
+## Many-To-Many (Under developement, branch `many-to-many`)
 This branch is scaling the original go chat to support chatting between n many user over an HTTP frontend. It will supports user to user and group chatting.
 
 ### Motivation:
