@@ -8,6 +8,8 @@ import (
 	"os"
 )
 
+const port  = 9500
+
 type Guest struct {
 	Ip string
 }
@@ -24,25 +26,14 @@ func (Guest Guest) send(conn net.Conn) {
 	}
 }
 
-func (Guest Guest) receive(conn net.Conn) {
-	replyReader := bufio.NewReader(conn)
-	reply, connErr := replyReader.ReadString('\n')
-
-	if connErr != nil {
-		log.Fatal("Error: ", connErr)
-	}
-	fmt.Print("Host: " + reply)
-}
-
 func (Guest Guest) Dial(conn net.Conn) {
 	for {
-		go Guest.send(conn)
-		Guest.receive(conn)
+		Guest.send(conn)
 	}
 }
 
-func (Guest Guest) Run() {
-	address := Guest.Ip + ":" + port
+func (Guest Guest) Run(partition int) {
+	address := Guest.Ip + ":" + fmt.Sprintf("%d", port + partition)
 	dial, dialErr := net.Dial("tcp", address)
 
 	if dialErr != nil {

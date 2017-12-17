@@ -5,43 +5,32 @@ import (
 	"log"
 	"fmt"
 	"bufio"
-	"os"
+	"strconv"
 )
 
-const port = "8080"
+const portNum = 9500
 
 type Host struct {
 	Ip   string
 }
 
-func (Host Host) send(conn net.Conn) {
-	stdReader := bufio.NewReader(os.Stdin)
-
-	reply, sysErr := stdReader.ReadString('\n')
-	if sysErr != nil {
-		log.Fatal("Error: ", sysErr)
-	}
-
-	fmt.Fprint(conn, reply)
-}
-
-func (Host Host) receive(conn net.Conn) {
+func (Host Host) receive(conn net.Conn, partition string) {
 	connReader := bufio.NewReader(conn)
 	message, connErr := connReader.ReadString('\n')
 	if connErr != nil {
 		log.Fatal("Error: ", connErr)
 	}
-	fmt.Print("Guest: " + message)
+	fmt.Print("Parition " + partition + ": " + message)
 }
 
-func (Host Host) Listen(conn net.Conn)  {
+func (Host Host) Listen(conn net.Conn, partition string)  {
 	for {
-		go Host.send(conn)
-		Host.receive(conn)
+		Host.receive(conn, partition)
 	}
 }
 
-func (Host Host) Run() {
+func (Host Host) Run(freePartition int) {
+	port := fmt.Sprintf("%d", portNum + freePartition)
 	address := Host.Ip + ":" + port
 	socket, socketErr := net.Listen("tcp", address)
 
@@ -55,6 +44,7 @@ func (Host Host) Run() {
 		log.Fatal("Error: ", refused)
 	}
 	fmt.Println("New connection accepted")
+	go Host.Listen(conn, strconv.Itoa(freePartition))
 
-	Host.Listen(conn)
+	Host.Run(freePartition + 1)
 }

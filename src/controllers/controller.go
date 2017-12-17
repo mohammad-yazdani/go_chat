@@ -21,7 +21,7 @@ func (controller Controller) handle(w http.ResponseWriter, r *http.Request) {
 	case "POST": controller.post(w, r)
 	}
 }
-func (controller Controller) get(w http.ResponseWriter, r *http.Request) {
+func (controller Controller) get(w http.ResponseWriter, r *http.Reequest) {
 	if !controller.rest.getAction(w, r) {
 		http.Error(w, "GET method not defined for this end-point.", http.StatusBadRequest)
 	}

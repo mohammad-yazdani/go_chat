@@ -7,6 +7,8 @@ import (
 	"errors"
 	endPoint "go_chat/src/core"
 	"flag"
+	"strconv"
+	"log"
 )
 
 func getGreeting(hour int) (string, error)  {
@@ -46,10 +48,14 @@ func main() {
 	if *isHost {
 		ip := os.Args[2]
 		host := endPoint.Host{Ip: ip}
-		host.Run()
+		host.Run(0)
 	} else {
 		ip := os.Args[1]
+		partition, err := strconv.Atoi(os.Args[2])
+		if err != nil {
+			log.Fatal("Incorrect parition format")
+		}
 		guest := endPoint.Guest{Ip: ip}
-		guest.Run()
+		guest.Run(partition)
 	}
 }
