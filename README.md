@@ -9,7 +9,10 @@ This is the final course project for a GOlang course I took online with CodeScho
 The code satisfies the same requirements as the course project, however I implemented it with an **object oriented approach**. This version also support **simultaneous** messaging where host and guest can send messages at the same time, which is done using the Golang's **multi-threaded** capablities.
 
 ### Updates:
-**Dec 17 2017:** Partitioning added. Every guest is now a parition and new guest can be added by using an additional integer argument. After the controller is finished, controller will create paritions as traffic increases. Design documents will be added.
+**Dec 17 2017:** Partitioning added. Every guest is now a parition and new guest can be added by using an additional integer argument. After the controller is finished, controller will create paritions as traffic increases.
+
+### Design
+For class diagrams and flow charts please see the `docs` directory.
 
 ### Build and Run
 To run as host:
