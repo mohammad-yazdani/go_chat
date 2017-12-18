@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>17</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>561</x>
+      <y>799</y>
+      <w>323</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>Host
+--
+- map: ExtendibleHash
+- dispatch : Controller
+--
+- Recieve(conn: net.Conn)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>663</y>
+      <w>255</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>ExtendibleHash
+--
++ push(item: Any)
++ get(id: Binary): Any</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>289</x>
+      <y>765</y>
+      <w>306</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+bg=black</panel_attributes>
+    <additional_attributes>160.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>969</x>
+      <y>476</y>
+      <w>238</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+- backend: * Server 
+- address: String
+--
++ GET()
++ POST()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>867</x>
+      <y>629</y>
+      <w>187</w>
+      <h>289</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+bg=black</panel_attributes>
+    <additional_attributes>10.0;150.0;90.0;150.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1343</x>
+      <y>969</y>
+      <w>289</w>
+      <h>221</h>
+    </coordinates>
+    <panel_attributes>Partition
+(Thread)
+--
+- db: ORM
+- cache: ConvCache
+- send()
+- recieve()
+--
++ Run(partitions: Integer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1105</x>
+      <y>629</y>
+      <w>204</w>
+      <h>221</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+bg=black</panel_attributes>
+    <additional_attributes>100.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1275</x>
+      <y>697</y>
+      <w>459</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>Client
+--
+- partitions: Array of * Partition
+- input: Controller
+--
++ send(message: String, partition: Integer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>935</x>
+      <y>272</y>
+      <w>289</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>/Server/
+--
+- address: String
+--
+/+ Run(condition: Integer)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1071</x>
+      <y>374</y>
+      <w>51</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>697</x>
+      <y>323</y>
+      <w>272</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1207</x>
+      <y>306</y>
+      <w>306</w>
+      <h>425</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0;160.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1462</x>
+      <y>833</y>
+      <w>51</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+</diagram>
